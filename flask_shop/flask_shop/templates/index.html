@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shop</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+    <h1>Online Shop</h1>
+    <div class="product-container">
+        {% for product in products %}
+        <div class="product" onclick="openForm('{{ product.name }}', '{{ product.price }}')">
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+            <p>{{ product.name }} - ${{ product.price }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Order Form Popup -->
+    <div id="popupForm" class="form-container">
+        <div class="form-content">
+            <span class="close" onclick="closeForm()">&times;</span>
+            <h2>Order Form</h2>
+            <p id="product-info"></p>
+            <form id="orderForm">
+                <input type="hidden" id="product-name">
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" required>
+
+                <label for="payment">Payment Method:</label>
+                <select id="payment">
+                    <option value="credit_card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="cash_on_delivery">Cash on Delivery</option>
+                </select>
+
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Popup -->
+    <div id="confirmationPopup" class="form-container">
+        <div class="form-content">
+            <p id="confirmationMessage"></p>
+            <button onclick="closeConfirmation()">OK</button>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
